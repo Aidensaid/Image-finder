@@ -7,6 +7,14 @@ const SelectableTable = (props) => {
   const renderedColorsList = props.users.map((user) => {
     return <tr>{user.favoriteColor}</tr>
   })
+  const renderedCheckboxes = props.users.map((user) => {
+    return (
+      <tr>
+        <input type="checkbox">
+        </input>
+      </tr>
+    )
+  })
   return (
     <div>
       <table className="ui collapsible table">
@@ -15,6 +23,9 @@ const SelectableTable = (props) => {
         </th>
         <th>Favourite color
         {renderedColorsList}
+        </th>
+        <th>Selected?
+    {renderedCheckboxes}
         </th>
       </table>
       <div className="colors">
