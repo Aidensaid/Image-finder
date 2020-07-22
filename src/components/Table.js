@@ -1,38 +1,40 @@
 import React from 'react';
 
-const SelectableTable = (props) => {
-  const renderedNamesList = props.users.map((user) => {
-    return <tr>{user.name}</tr>
-  })
-  const renderedColorsList = props.users.map((user) => {
-    return <tr>{user.favoriteColor}</tr>
-  })
-  const renderedCheckboxes = props.users.map((user) => {
+
+class SelectableTable extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      id: ''
+    }
+    this.handleSelect = this.handleSelect.bind()
+  }
+
+  handleSelect = (event) => {
+    console.log(event.target.name)
+  }
+
+  render() {
     return (
-      <tr>
-        <input type="checkbox">
-        </input>
-      </tr>
-    )
-  })
-  return (
-    <div>
-      <table className="ui collapsible table">
-        <th>Name
-          {renderedNamesList}
-        </th>
-        <th>Favourite color
-        {renderedColorsList}
-        </th>
-        <th>Selected?
-    {renderedCheckboxes}
-        </th>
-      </table>
-      <div className="colors">
-        {/* Print unique colors here */}
+      <div>
+        <table className="ui collapsible table">
+          <th>Name
+           {this.props.users.map((user) => <td>{user.name}</td>)}
+          </th>
+          <th>Favourite color
+            {this.props.users.map((user) => <td>{user.favoriteColor}</td>)}
+          </th>
+          <th>Selected?
+            {this.props.users.map((user) => <input onClick={this.handleSelect} name={user.id} type="checkbox"></input>)}
+          </th>
+        </table>
+        <div className="colors">
+          {/* Print unique colors here */}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+}
+
 
 export default SelectableTable
