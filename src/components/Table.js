@@ -19,9 +19,11 @@ class SelectableTable extends React.Component {
 
   handleSelect = (event) => {
     let checked = event.target.name
-    this.setState({ [event.target.name]: { color: this.state[checked].color, isSelected: true, } })
-    console.log(this.state[checked])
+    // this.setState({ [event.target.name]: { color: this.state[checked].color, isSelected: true, } })
+    this.setState(prevState => ({ [checked]: { color: prevState[checked].color, isSelected: !prevState[checked].isSelected } }))
+    console.log(this.state)
   }
+
 
   render() {
     return (
@@ -39,8 +41,11 @@ class SelectableTable extends React.Component {
         </table>
         <div className="colors">
           {(this.state[15].isSelected) ? <div>{this.state[15].color}</div> : null}
-          {/* To do, work out how to render colors */}
-          {/* Print unique colors here */}
+          {(this.state[120].isSelected) ? <div>{this.state[120].color}</div> : null}
+          {(this.state[33].isSelected) ? <div>{this.state[33].color}</div> : null}
+          {(this.state[85].isSelected) ? <div>{this.state[85].color}</div> : null}
+          {(this.state[1].isSelected) ? <div>{this.state[1].color}</div> : null}
+          {(this.state[42].isSelected) ? <div>{this.state[42].color}</div> : null}
         </div>
       </div>
     );
