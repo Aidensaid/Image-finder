@@ -10,15 +10,17 @@ class SelectableTable extends React.Component {
       120: { color: 'red', isSelected: false },
       33: { color: 'blue', isSelected: false },
       85: { color: 'red', isSelected: false },
-      1: { color: 'green', isSelected: false }
+      1: { color: 'green', isSelected: false },
+      42: { color: 'green', isSelected: false }
     }
+
     this.handleSelect = this.handleSelect.bind()
   }
 
   handleSelect = (event) => {
-    console.log(event.target.name)
-    this.setState({ [event.target.name]: { isSelected: true } })
-    console.log(this.state)
+    let checked = event.target.name
+    this.setState({ [event.target.name]: { color: this.state[checked].color, isSelected: true, } })
+    console.log(this.state[checked])
   }
 
   render() {
@@ -36,6 +38,8 @@ class SelectableTable extends React.Component {
           </th>
         </table>
         <div className="colors">
+          {(this.state[15].isSelected) ? <div>{this.state[15].color}</div> : null}
+          {/* To do, work out how to render colors */}
           {/* Print unique colors here */}
         </div>
       </div>
