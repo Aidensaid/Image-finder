@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 class SelectableTable extends React.Component {
   constructor(props) {
     super(props)
@@ -10,7 +8,7 @@ class SelectableTable extends React.Component {
       120: { color: 'red', isSelected: false },
       33: { color: 'blue', isSelected: false },
       85: { color: 'red', isSelected: false },
-      1: { color: 'green', isSelected: false },
+      1: { color: 'red', isSelected: false },
       42: { color: 'green', isSelected: false }
     }
 
@@ -19,10 +17,9 @@ class SelectableTable extends React.Component {
 
   handleSelect = (event) => {
     let checked = event.target.name
-    // this.setState({ [event.target.name]: { color: this.state[checked].color, isSelected: true, } })
     this.setState(prevState => ({ [checked]: { color: prevState[checked].color, isSelected: !prevState[checked].isSelected } }))
-    console.log(this.state)
   }
+
 
 
   render() {
@@ -40,10 +37,10 @@ class SelectableTable extends React.Component {
           </th>
         </table>
         <div className="colors">
-          {(this.state[15].isSelected) ? <div>{this.state[15].color}</div> : null}
-          {(this.state[120].isSelected) ? <div>{this.state[120].color}</div> : null}
+          {(this.state[15].isSelected && !this.state[42].isSelected) ? <div>{this.state[15].color}</div> : null}
+          {(this.state[120].isSelected && !this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[120].color}</div> : null}
           {(this.state[33].isSelected) ? <div>{this.state[33].color}</div> : null}
-          {(this.state[85].isSelected) ? <div>{this.state[85].color}</div> : null}
+          {(this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[85].color}</div> : null}
           {(this.state[1].isSelected) ? <div>{this.state[1].color}</div> : null}
           {(this.state[42].isSelected) ? <div>{this.state[42].color}</div> : null}
         </div>
@@ -51,6 +48,5 @@ class SelectableTable extends React.Component {
     );
   };
 }
-
 
 export default SelectableTable
