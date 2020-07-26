@@ -9,10 +9,9 @@ class SelectableTable extends React.Component {
       33: { color: 'blue', isSelected: false },
       85: { color: 'red', isSelected: false },
       1: { color: 'red', isSelected: false },
-      42: { color: 'green', isSelected: false }
+      42: { color: 'green', isSelected: false },
+      50: { color: 'orange', isSelected: false }
     }
-
-    this.handleSelect = this.handleSelect.bind()
   }
 
   handleSelect = (event) => {
@@ -20,7 +19,9 @@ class SelectableTable extends React.Component {
     this.setState(prevState => ({ [checked]: { color: prevState[checked].color, isSelected: !prevState[checked].isSelected } }))
   }
 
-
+  componentDidMount() {
+    console.log(this.props.entries)
+  }
 
   render() {
     return (
@@ -37,12 +38,13 @@ class SelectableTable extends React.Component {
           </th>
         </table>
         <div className="colors">
-          {(this.state[15].isSelected && !this.state[42].isSelected) ? <div>{this.state[15].color}</div> : null}
+          {/* {console.log(entries)} */}
+          {/* {(this.state[15].isSelected && !this.state[42].isSelected) ? <div>{this.state[15].color}</div> : null}
           {(this.state[120].isSelected && !this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[120].color}</div> : null}
           {(this.state[33].isSelected) ? <div>{this.state[33].color}</div> : null}
           {(this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[85].color}</div> : null}
           {(this.state[1].isSelected) ? <div>{this.state[1].color}</div> : null}
-          {(this.state[42].isSelected) ? <div>{this.state[42].color}</div> : null}
+          {(this.state[42].isSelected) ? <div>{this.state[42].color}</div> : null} */}
         </div>
       </div>
     );
