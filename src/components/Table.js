@@ -10,7 +10,7 @@ class SelectableTable extends React.Component {
       85: { color: 'red', isSelected: false },
       1: { color: 'red', isSelected: false },
       42: { color: 'green', isSelected: false },
-      50: { color: 'orange', isSelected: false }
+      // 50: { color: 'orange', isSelected: false }
     }
   }
 
@@ -19,8 +19,14 @@ class SelectableTable extends React.Component {
     this.setState(prevState => ({ [checked]: { color: prevState[checked].color, isSelected: !prevState[checked].isSelected } }))
   }
 
-  componentDidMount() {
-    console.log(this.props.entries)
+  returnUniqueColors = () => {
+    const usersArray = Object.entries(this.state).map((user) => user[1])
+    this.activeColors = usersArray.filter(user => user.isSelected)
+    console.log(this.activeColors)
+  }
+
+  componentDidUpdate() {
+    this.returnUniqueColors()
   }
 
   render() {
@@ -38,6 +44,10 @@ class SelectableTable extends React.Component {
           </th>
         </table>
         <div className="colors">
+          {Object.entries(this.state).map((user) => user[1].isSelected && <li>{user[1].color}</li>)}
+          {Object.entries(this.state).map((user) => console.log(user))}
+          {/* // < li > { user[1].color }</li>)} */}
+          {/* {this.props.entries.map((entry) => <li>{entry[1].favoriteColor}</li>)} */}
           {/* {console.log(entries)} */}
           {/* {(this.state[15].isSelected && !this.state[42].isSelected) ? <div>{this.state[15].color}</div> : null}
           {(this.state[120].isSelected && !this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[120].color}</div> : null}
@@ -46,7 +56,7 @@ class SelectableTable extends React.Component {
           {(this.state[1].isSelected) ? <div>{this.state[1].color}</div> : null}
           {(this.state[42].isSelected) ? <div>{this.state[42].color}</div> : null} */}
         </div>
-      </div>
+      </div >
     );
   };
 }
