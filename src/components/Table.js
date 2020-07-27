@@ -19,17 +19,34 @@ class SelectableTable extends React.Component {
     this.setState(prevState => ({ [checked]: { color: prevState[checked].color, isSelected: !prevState[checked].isSelected } }))
   }
 
+  removeDuplicates(array, property) {
+    return array.filter((obj, pos, arr) => {
+      return arr.map(mapObj => mapObj[property]).indexOf(obj[property]) === pos;
+    });
+  }
+
   returnUniqueColors = () => {
     const usersArray = Object.entries(this.state).map((user) => user[1])
-    this.activeColors = usersArray.filter(user => user.isSelected)
-    console.log(this.activeColors)
+    console.log('users array', usersArray)
+    const activeColors = usersArray.filter(user => user.isSelected)
+    console.log('active colors', activeColors)
+    this.uniqueColors = this.removeDuplicates(activeColors, 'color')
+    console.log('unique colors', this.uniqueColors)
+    return this.uniqueColors
+  }
+
+  componentDidMount() {
+    console.log('unique colors CDM', this.uniqueColors)
   }
 
   componentDidUpdate() {
-    this.returnUniqueColors()
+    // this.returnUniqueColors()
+    console.log('state object', this.state)
+    console.log('unique colors CDU', this.uniqueColors)
   }
 
   render() {
+    this.returnUniqueColors()
     return (
       <div>
         <table className="ui collapsible table">
@@ -44,17 +61,7 @@ class SelectableTable extends React.Component {
           </th>
         </table>
         <div className="colors">
-          {Object.entries(this.state).map((user) => user[1].isSelected && <li>{user[1].color}</li>)}
-          {Object.entries(this.state).map((user) => console.log(user))}
-          {/* // < li > { user[1].color }</li>)} */}
-          {/* {this.props.entries.map((entry) => <li>{entry[1].favoriteColor}</li>)} */}
-          {/* {console.log(entries)} */}
-          {/* {(this.state[15].isSelected && !this.state[42].isSelected) ? <div>{this.state[15].color}</div> : null}
-          {(this.state[120].isSelected && !this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[120].color}</div> : null}
-          {(this.state[33].isSelected) ? <div>{this.state[33].color}</div> : null}
-          {(this.state[85].isSelected && !this.state[1].isSelected) ? <div>{this.state[85].color}</div> : null}
-          {(this.state[1].isSelected) ? <div>{this.state[1].color}</div> : null}
-          {(this.state[42].isSelected) ? <div>{this.state[42].color}</div> : null} */}
+          {(this.uniqueColors) ? this.uniqueColors.map((user => <li>{user.color}</li>)) : null}
         </div>
       </div >
     );
