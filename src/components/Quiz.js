@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 
-const questions = (props) => {
+const Questions = (props) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const handleNextQuestion = () => {
+    setCurrentQuestion(currentQuestion + 1)
+    console.log(currentQuestion)
+  }
   return (
     <>
-      <div>{props.quiz[0].title}</div>
-      <div>{props.quiz[0].options.map((option) => <li>{option}<input style={{ marginLeft: "30px;" }} type="radio" value={option}></input></li>)}</div>
+      <div>{props.quiz[currentQuestion].title}</div>
+      <div>{props.quiz[currentQuestion].options.map((option) => <li>{option}<input style={{ marginLeft: "30px;" }} type="radio" value={option}></input></li>)}</div>
+      <button>Submit answer</button>
+      <button onClick={handleNextQuestion}>Next question</button>
     </>
   )
 }
 
-export default questions
+export default Questions
